@@ -107,7 +107,7 @@ symbol = "nix "
 symbol = "ml "
 
 [package]
-symbol = " "
+symbol = "pkg "
 
 [perl]
 symbol = "pl "
