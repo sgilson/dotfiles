@@ -1,0 +1,71 @@
+let mapleader=" "
+set number relativenumber
+set ignorecase
+set incsearch
+set smartcase
+set scrolloff=0
+set visualbell
+set noerrorbells
+set idearefactormode=keep
+set showmode
+set showcmd
+set clipboard+=unnamed
+set hlsearch
+
+nnoremap <leader>rn :action RenameElement<CR>
+map <leader>l <Action>(Refactorings.QuickListPopupAction)
+map <leader>= <Action>(ReformatCode)
+map <leader>o <Action>(OptimizeImports)
+map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>z <Action>(TogglePresentationMode)
+map <leader>c <Action>(CommentByLineComment)
+map <leader>s <Action>(SearchEverywhere)
+map <leader>/ <Action>(GotoFile)
+map <leader>a <Action>(ShowIntentionActions)
+map <leader>t <Action>(ActivateTerminalToolWindow)
+map <leader>gc <Action>(Git.Branches)
+map <leader>gw <Action>(ActivateVersionControlToolWindow)
+map ge <Action>(GotoNextError)
+map gE <Action>(GotoPreviousError)
+map gi <Action>(GotoImplementation)
+map \r <Action>(IdeaVim.ReloadVimRc.reload)
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap zC :action CollapseRegionRecursively<CR>
+nnoremap zO :action ExpandRegionRecursively<CR>
+
+map <leader>w <C-w>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <tab> <C-w><C-w>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>v :vs<CR>
+nnoremap <leader>h :sp<CR>
+
+map ,r <Action>(Run)
+map ,d <Action>(Debug)
+map ,s <Action>(ChooseRunConfiguration)
+map ,t <Action>(ActivateRunToolWindow)
+map ,x <Action>(Stop)
+map ,f <Action>(RecentFiles)
+map ,b <Action>(RecentLocations)
+
+map <C-h> <Action>(EditorLeft)
+map <C-j> <Action>(EditorDown)
+map <C-k> <Action>(EditorUp)
+map <C-l> <Action>(EditorRight)
+inoremap <C-h> :action EditorLeft<CR>
+inoremap <C-j> :action EditorDown<CR>
+inoremap <C-k> :action EditorUp<CR>
+inoremap <C-l> :action EditorRight<CR>
+
+inoremap jj <Esc>
+
+set NERDTree
+map <leader>f :NERDTree<CR>
+
+set surround
+set highlightedyank
+let g:highlightedyank_highlight_color = "rgba(215, 224, 85, 100)"
+let g:highlightedyank_highlight_duration="500"

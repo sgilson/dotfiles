@@ -1,0 +1,22 @@
+# Source this file after a new zsh or oh-my-zsh installation
+# in your ~/.zshrc
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+plugins=(git zsh-autosuggestions colored-man-pages command-not-found vi-mode)
+
+if type starship > /dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+if type kubectl > /dev/null; then
+  source <(kubectl completion zsh)
+  compdef __start_kubectl k
+fi
+
+if type sqlx > /dev/null; then
+  source <(sqlx completions zsh)
+fi
+
+source ~/.aliases
