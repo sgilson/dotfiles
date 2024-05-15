@@ -40,7 +40,7 @@ symbol = "deno "
 symbol = ".NET "
 
 [directory]
-read_only = " "
+read_only = " [ro]"
 
 [docker_context]
 symbol = "docker "
@@ -67,7 +67,7 @@ renamed = "r"
 deleted = "x"
 
 [git_branch]
-symbol = " "
+symbol = ""
 style = "bold green"
 
 [golang]
