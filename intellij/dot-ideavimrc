@@ -19,7 +19,7 @@ map <leader>o <Action>(OptimizeImports)
 map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>z <Action>(TogglePresentationMode)
 map <leader>c <Action>(CommentByLineComment)
-map <leader>s <Action>(SearchEverywhere)
+map <leader>f <Action>(SearchEverywhere)
 map <leader>/ <Action>(GotoFile)
 map <leader>a <Action>(ShowIntentionActions)
 map <leader>t <Action>(ActivateTerminalToolWindow)
@@ -63,7 +63,7 @@ inoremap <C-l> :action EditorRight<CR>
 inoremap jj <Esc>
 
 set NERDTree
-map <leader>f :NERDTree<CR>
+map <leader>n :NERDTree<CR>
 
 set surround
 set highlightedyank
