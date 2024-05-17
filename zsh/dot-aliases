@@ -1,5 +1,9 @@
-alias k=kubectl
-alias vim=nvim
+if type nvim > /dev/null; then
+    alias k=kubectl
+fi
+if type nvim > /dev/null; then
+    alias vim=nvim
+fi
 alias gs="git status"
 alias gf="git fetch"
 alias gph="git push origin HEAD"
