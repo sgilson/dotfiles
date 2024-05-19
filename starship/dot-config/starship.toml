@@ -43,6 +43,7 @@ symbol = ".NET "
 read_only = " [ro]"
 
 [docker_context]
+disabled = true
 symbol = "docker "
 
 [elixir]
@@ -107,6 +108,7 @@ symbol = "nix "
 symbol = "ml "
 
 [package]
+disabled = true
 symbol = "pkg "
 
 [perl]
