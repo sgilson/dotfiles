@@ -1,4 +1,4 @@
-if type nvim > /dev/null; then
+if type kubectl > /dev/null; then
     alias k=kubectl
 fi
 if type nvim > /dev/null; then
