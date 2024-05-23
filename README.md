@@ -5,8 +5,6 @@ I use across dev machines.
 Installation and management of configuration files
 is done through [GNU Stow](https://www.gnu.org/software/stow/).
 
-## Prerequisites
-
 Clone the repository and perform the following:
 
 ```shell
