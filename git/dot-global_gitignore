@@ -4,6 +4,7 @@
 
 # Mise
 .mise.toml
+.mise.local.toml
 .tool-versions
 
 # MacOS
