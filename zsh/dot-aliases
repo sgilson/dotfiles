@@ -17,3 +17,4 @@ alias gm="git commit -m"
 alias gc="git checkout"
 
 alias lsf="ls -larth"
+alias c="clear"
