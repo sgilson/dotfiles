@@ -6,6 +6,11 @@ export LC_ALL=en_US.UTF-8
 
 plugins=(git zsh-autosuggestions colored-man-pages command-not-found vi-mode)
 
+if type mise > /dev/null; then
+  # activate mise
+  eval "$(mise activate zsh)"
+fi
+
 if type starship > /dev/null; then
   eval "$(starship init zsh)"
 fi

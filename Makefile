@@ -3,6 +3,11 @@
 intellij:
 	stow intellij
 
+.PHONY: git
+git:
+	stow git
+	git config --global core.excludesfile ~/.global_gitignore
+
 .PHONY: starship
 starship:
 	stow starship
@@ -16,4 +21,4 @@ zsh:
 	stow zsh
 
 .PHONY: install
-install: intellij starship wezterm zsh
+install: git intellij starship wezterm zsh

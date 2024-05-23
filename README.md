@@ -10,7 +10,7 @@ is done through [GNU Stow](https://www.gnu.org/software/stow/).
 Clone the repository and perform the following:
 
 ```shell
-brew install stow wezterm starship
+brew install stow wezterm starship mise
 make install
 echo 'source ~/.zshrc_custom' >> ~/.zshrc # only on first install
 ```

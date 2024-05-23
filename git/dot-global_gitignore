@@ -1,0 +1,10 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Mise
+.mise.toml
+.tool-versions
+
+# MacOS
+**/.DS_Store
