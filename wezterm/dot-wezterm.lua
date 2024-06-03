@@ -8,6 +8,6 @@ config.font = wezterm.font('JetBrains Mono')
 config.audible_bell = 'Disabled'
 config.use_dead_keys = false
 
-hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = true
 
 return config
