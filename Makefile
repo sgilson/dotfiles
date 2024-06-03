@@ -20,5 +20,9 @@ wezterm:
 zsh:
 	stow zsh
 
+.PHONY: zellij
+zellij:
+	stow zellij
+
 .PHONY: install
-install: git intellij starship wezterm zsh
+install: git intellij starship wezterm zsh zellij

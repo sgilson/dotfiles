@@ -19,3 +19,4 @@ alias ga="git add"
 
 alias lsf="ls -larth"
 alias c="clear"
+

@@ -1,0 +1,26 @@
+simplified_ui true
+
+ui {
+    pane_frames {
+        rounded_corners   true
+        hide_session_name true
+    }
+}
+
+themes {
+    monokai_pro {
+        fg      "#FDF9F3"
+        bg      "#363537"
+        black   "#363537"
+        red     "#FF6188"
+        green   "#A9DC76"
+        yellow  "#FFD866"
+        blue    "#FC9867"
+        magenta "#AB9DF2"
+        cyan    "#78DCE8"
+        white   "#FDF9F3"
+        orange  "#FD951F"
+    }
+}
+
+theme "monokai_pro"
