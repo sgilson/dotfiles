@@ -20,7 +20,14 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 ## Load completions
-autoload -Uz compinit && compinit
+## https://gist.github.com/ctechols/ca1035271ad134841284#file-compinit-zsh-L2
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
+
 zinit cdreplay -q
 
 # End zinit
