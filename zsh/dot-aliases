@@ -1,10 +1,10 @@
-if type kubectl > /dev/null; then
+if [[ $+commands[kubectl] ]]; then
     alias k=kubectl
 fi
-if type nvim > /dev/null; then
+if [[ $+commands[nvim] ]]; then
     alias vim=nvim
 fi
-if type gdate > /dev/null; then
+if [[ $+commands[gdate] ]]; then
     alias date="gdate"
 fi
 

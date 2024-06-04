@@ -46,32 +46,32 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-if type mise > /dev/null; then
+if [[ $+commands[mise] ]]; then
   eval "$(mise activate zsh)"
 fi
 
-if type starship > /dev/null; then
+if [[ $+commands[starship] ]]; then
   eval "$(starship init zsh)"
 fi
 
-if type kubectl > /dev/null; then
+if [[ $+commands[kubectl] ]]; then
   source <(kubectl completion zsh)
   compdef __start_kubectl k
 fi
 
-if type sqlx > /dev/null; then
+if [[ $+commands[sqlx] ]]; then
   source <(sqlx completions zsh)
 fi
 
-if type fzf > /dev/null; then
+if [[ $+commands[fzf] ]]; then
   eval "$(fzf --zsh)"
 fi
 
-if type zoxide > /dev/null; then
+if [[ $+commands[zoxide] ]]; then
   eval "$(zoxide init zsh --cmd cd)"
 fi
 
-if type zellij > /dev/null; then
+if [[ $+commands[zellij] && -z "$IDEA_INITIAL_DIRECTORY" ]]; then
   eval "$(zellij setup --generate-auto-start zsh)"
 fi
 
