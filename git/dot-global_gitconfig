@@ -7,6 +7,8 @@
 
 [delta]
     navigate = true
+    # open in IntelliJ
+    hyperlinks-file-link-format = "idea://open?file={path}&line={line}"
 
 [merge]
     conflictstyle = diff3
