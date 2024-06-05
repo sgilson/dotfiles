@@ -82,5 +82,9 @@ if [[ $+commands[zellij] && -z "$IDEA_INITIAL_DIRECTORY" ]]; then
   eval "$(zellij setup --generate-auto-start zsh)"
 fi
 
+if [[ $+commands[delta] ]]; then
+  eval "$(delta --generate-completion zsh)"
+fi
+
 source ~/.aliases
 
