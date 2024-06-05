@@ -6,7 +6,7 @@ intellij:
 .PHONY: git
 git:
 	stow git
-	git config --global core.excludesfile ~/.global_gitignore
+	git config --global include.path ~/.global_gitconfig
 
 .PHONY: starship
 starship:
