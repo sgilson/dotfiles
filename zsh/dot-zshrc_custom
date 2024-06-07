@@ -78,7 +78,7 @@ if [[ $+commands[zoxide] ]]; then
   eval "$(zoxide init zsh --cmd cd)"
 fi
 
-if [[ $+commands[zellij] && -z "$IDEA_INITIAL_DIRECTORY" ]]; then
+if [[ $+commands[zellij] && -z "$IDEA_INITIAL_DIRECTORY" && -z "$VSCODE_NONCE" ]]; then
   eval "$(zellij setup --generate-auto-start zsh)"
 fi
 
