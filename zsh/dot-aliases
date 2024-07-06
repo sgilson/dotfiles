@@ -21,4 +21,5 @@ alias gds="git diff --staged"
 
 alias lsf="ls -larth"
 alias c="clear"
-
+alias u="cd .."
+alias fzfp="fzf --preview 'bat --color=always {}'"
