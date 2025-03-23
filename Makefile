@@ -12,6 +12,10 @@ git:
 starship:
 	stow starship
 
+.PHONY: vscode
+vscode:
+	stow vscode
+
 .PHONY: wezterm
 wezterm:
 	stow wezterm
@@ -25,4 +29,4 @@ zellij:
 	stow zellij
 
 .PHONY: install
-install: git intellij starship wezterm zsh zellij
+install: git intellij starship vscode wezterm zsh zellij
