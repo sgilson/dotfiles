@@ -1,4 +1,8 @@
 
+.PHONY: aerospace
+aerospace:
+	stow aerospace
+
 .PHONY: intellij
 intellij:
 	stow intellij
