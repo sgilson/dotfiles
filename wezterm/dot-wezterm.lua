@@ -1,12 +1,12 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 local act = wezterm.action
 
 config = wezterm.config_builder()
 
-config.color_scheme = 'Google Dark (Gogh)'
+config.color_scheme = "Sonokai (Gogh)"
 config.font_size = 14.0
-config.font = wezterm.font('JetBrains Mono')
-config.audible_bell = 'Disabled'
+config.font = wezterm.font("JetBrains Mono")
+config.audible_bell = "Disabled"
 config.hide_tab_bar_if_only_one_tab = true
 config.use_dead_keys = false
 config.send_composed_key_when_left_alt_is_pressed = true
