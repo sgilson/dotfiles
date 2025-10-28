@@ -1,0 +1,5 @@
+font-family               = "JetBrains Mono"
+font-size                 = 13
+theme                     = Sonokai
+macos-icon                = retro
+macos-titlebar-proxy-icon = hidden

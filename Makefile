@@ -12,6 +12,10 @@ git:
 	stow git
 	git config --global include.path ~/.global_gitconfig
 
+.PHONY: ghostty
+ghostty:
+	stow ghostty
+
 .PHONY: starship
 starship:
 	stow starship
@@ -19,10 +23,6 @@ starship:
 .PHONY: vscode
 vscode:
 	stow vscode
-
-.PHONY: wezterm
-wezterm:
-	stow wezterm
 
 .PHONY: zsh
 zsh:
@@ -33,4 +33,4 @@ zellij:
 	stow zellij
 
 .PHONY: install
-install: git intellij starship vscode wezterm zsh zellij
+install: git intellij starship vscode ghostty zsh zellij
