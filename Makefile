@@ -32,9 +32,5 @@ vscode:
 zsh:
 	stow zsh
 
-.PHONY: zellij
-zellij:
-	stow zellij
-
 .PHONY: install
-install: git intellij starship tmux vscode ghostty zsh zellij
+install: git intellij starship tmux vscode ghostty zsh
