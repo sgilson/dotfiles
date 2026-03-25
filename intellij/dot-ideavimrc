@@ -12,7 +12,9 @@ set showcmd
 set clipboard+=unnamed
 set hlsearch
 
-nnoremap <leader>rn :action RenameElement<CR>
+"Show commands using :actionlist
+map <leader>rn <Action>(RenameElement)
+map <leader>ra <Action>(Refactorings.QuickListPopupAction)
 map <leader>l <Action>(Refactorings.QuickListPopupAction)
 map <leader>= <Action>(ReformatCode)
 map <leader>o <Action>(OptimizeImports)
@@ -23,11 +25,15 @@ map <leader>f <Action>(SearchEverywhere)
 map <leader>/ <Action>(GotoFile)
 map <leader>a <Action>(ShowIntentionActions)
 map <leader>t <Action>(ActivateTerminalToolWindow)
+map <leader>p <Action>(ManageRecentProjects)
 map <leader>gc <Action>(Git.Branches)
 map <leader>gw <Action>(ActivateVersionControlToolWindow)
 map ge <Action>(GotoNextError)
 map gE <Action>(GotoPreviousError)
 map gi <Action>(GotoImplementation)
+map gb <Action>(Bookmarks.Goto)
+map gl <Action>(RecentLocations)
+map gr <Action>(RecentFiles)
 map \r <Action>(IdeaVim.ReloadVimRc.reload)
 nnoremap \e :e ~/.ideavimrc<CR>
 nnoremap zC :action CollapseRegionRecursively<CR>
@@ -43,13 +49,15 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>v :vs<CR>
 nnoremap <leader>h :sp<CR>
 
+vnoremap < <gv
+vnoremap > >gv
+
 map ,r <Action>(Run)
 map ,d <Action>(Debug)
 map ,s <Action>(ChooseRunConfiguration)
 map ,t <Action>(ActivateRunToolWindow)
 map ,x <Action>(Stop)
 map ,f <Action>(RecentFiles)
-map ,b <Action>(RecentLocations)
 
 map <C-h> <Action>(EditorLeft)
 map <C-j> <Action>(EditorDown)

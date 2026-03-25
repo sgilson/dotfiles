@@ -1,13 +1,32 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
+format = '$all$kubernetes$aws$time$cmd_duration$line_break$status$character'
+
 [character]
 success_symbol = "[>](bold green)"
 error_symbol = "[x](bold red)"
 vimcmd_symbol = "[<](bold green)"
 
+[kubernetes]
+disabled = true
+symbol = ""
+format = '[$symbol](bright-blue) [$context( \($namespace\))]($style) '
+
+[[kubernetes.contexts]]
+context_pattern = "^prod.*"
+style = "red"
 
 [aws]
-symbol = "aws "
+format = 'on [$symbol($profile )(\($region\) )]($style) '
+disabled = true
+symbol = ""
+[aws.region_aliases]
+us-west-2 = "uw2"
+us-east-1 = "ue1"
+us-east-2 = "ue2"
+
+[cmd_duration]
+min_time = 30000
 
 [bun]
 symbol = "bun "
@@ -55,6 +74,7 @@ symbol = "elm "
 [git_commit]
 style = "bold green"
 tag_disabled = false
+only_detached = false
 
 [git_metrics]
 disabled = false
