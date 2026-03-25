@@ -20,6 +20,10 @@ ghostty:
 starship:
 	stow starship
 
+.PHONY: tmux
+tmux:
+	stow tmux
+
 .PHONY: vscode
 vscode:
 	stow vscode
@@ -33,4 +37,4 @@ zellij:
 	stow zellij
 
 .PHONY: install
-install: git intellij starship vscode ghostty zsh zellij
+install: git intellij starship tmux vscode ghostty zsh zellij
