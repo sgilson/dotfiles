@@ -1,0 +1,118 @@
+# Pure zsh prompt — git info, vi mode, directory
+
+setopt prompt_subst
+autoload -Uz vcs_info add-zsh-hook
+
+# --- vcs_info ---
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats '%b %7.7i'
+zstyle ':vcs_info:git:*' actionformats '%b %7.7i (%a)'
+zstyle ':vcs_info:git:*' get-revision true
+zstyle ':vcs_info:git:*' check-for-changes false
+
+# --- git status (single fork) ---
+
+_prompt_git_status() {
+  _git_ahead=0 _git_behind=0
+  _git_staged=0 _git_unstaged=0 _git_untracked=0
+  _git_deleted=0 _git_renamed=0
+
+  local raw
+  raw=$(command git status --porcelain=v2 --branch 2>/dev/null) || return 1
+
+  local line
+  for line in ${(f)raw}; do
+    case $line in
+      '# branch.ab '*)
+        _git_ahead=${${line#*+}%% *}
+        _git_behind=${${line#*-}%% *}
+        ;;
+      '1 '*)
+        [[ ${line:2:1} != '.' ]] && (( _git_staged++ ))
+        [[ ${line:3:1} != '.' ]] && (( _git_unstaged++ ))
+        [[ ${line:3:1} == 'D' ]] && (( _git_deleted++ ))
+        ;;
+      '2 '*)
+        (( _git_renamed++ ))
+        [[ ${line:2:1} != '.' ]] && (( _git_staged++ ))
+        [[ ${line:3:1} != '.' ]] && (( _git_unstaged++ ))
+        ;;
+      'u '*)
+        (( _git_unstaged++ ))
+        ;;
+      '? '*)
+        (( _git_untracked++ ))
+        ;;
+    esac
+  done
+}
+
+# --- vi mode ---
+
+_prompt_vimode='insert'
+_prompt_char_str='%B%F{green}>%f%b '
+
+_prompt_update_char() {
+  if [[ $_prompt_vimode == 'cmd' ]]; then
+    _prompt_char_str='%B%F{green}<%f%b '
+  elif (( _prompt_last_status == 0 )); then
+    _prompt_char_str='%B%F{green}>%f%b '
+  else
+    _prompt_char_str='%B%F{red}x%f%b '
+  fi
+}
+
+zle-keymap-select() {
+  case $KEYMAP in
+    vicmd)      _prompt_vimode='cmd' ;;
+    viins|main) _prompt_vimode='insert' ;;
+  esac
+  _prompt_update_char
+  zle reset-prompt
+}
+
+zle-line-init() {
+  _prompt_vimode='insert'
+  _prompt_update_char
+  zle reset-prompt
+}
+
+zle -N zle-keymap-select
+zle -N zle-line-init
+
+# --- precmd: assemble prompt ---
+
+_prompt_precmd() {
+  _prompt_last_status=$?
+
+  vcs_info
+
+  local git_info=""
+  if [[ -n $vcs_info_msg_0_ ]]; then
+    _prompt_git_status
+
+    local indicators=""
+    (( _git_ahead > 0 && _git_behind > 0 )) && indicators+="<>"
+    (( _git_ahead > 0 && _git_behind == 0 )) && indicators+=">"
+    (( _git_behind > 0 && _git_ahead == 0 )) && indicators+="<"
+    (( _git_staged > 0 )) && indicators+="+${_git_staged}"
+    (( _git_unstaged > 0 )) && indicators+="!${_git_unstaged}"
+    (( _git_untracked > 0 )) && indicators+="?${_git_untracked}"
+    (( _git_renamed > 0 )) && indicators+="r${_git_renamed}"
+    (( _git_deleted > 0 )) && indicators+="x${_git_deleted}"
+
+    git_info=" %B%F{green}${vcs_info_msg_0_}%f%b"
+    [[ -n $indicators ]] && git_info+=" %B%F{green}[${indicators}]%f%b"
+  fi
+
+  local dir_info="%B%F{cyan}%3~%f%b"
+  [[ ! -w $PWD ]] && dir_info+=" [ro]"
+
+  _prompt_update_char
+
+  PROMPT="${dir_info}${git_info}
+\${_prompt_char_str}"
+}
+
+add-zsh-hook precmd _prompt_precmd

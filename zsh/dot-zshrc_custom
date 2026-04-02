@@ -57,9 +57,7 @@ if [[ $+commands[mise] ]]; then
   eval "$(mise activate zsh)"
 fi
 
-if [[ $+commands[starship] ]]; then
-  eval "$(starship init zsh)"
-fi
+source ~/.zsh-prompt
 
 if [[ $+commands[kubectl] ]]; then
   source <(kubectl completion zsh)
@@ -84,3 +82,6 @@ fi
 
 source ~/.aliases
 
+export EDITOR=nvim
+bindkey -v
+KEYTIMEOUT=1
