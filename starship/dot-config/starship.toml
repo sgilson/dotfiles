@@ -20,10 +20,14 @@ style = "red"
 format = 'on [$symbol($profile )(\($region\) )]($style) '
 disabled = true
 symbol = ""
+
 [aws.region_aliases]
 us-west-2 = "uw2"
 us-east-1 = "ue1"
 us-east-2 = "ue2"
+
+[gcloud]
+disabled = true
 
 [cmd_duration]
 min_time = 30000
