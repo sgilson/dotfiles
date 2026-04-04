@@ -20,6 +20,7 @@ alias gd="git diff"
 alias gds="git diff --staged"
 
 alias lsf="ls -larth"
+alias ll="lsd -lrt --date '+%Y-%m-%d %H:%M:%S'"
 alias c="clear"
 alias u="cd .."
 alias fzfp="fzf --preview 'bat --color=always {}'"
