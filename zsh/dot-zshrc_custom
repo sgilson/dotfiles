@@ -84,4 +84,6 @@ source ~/.aliases
 
 export EDITOR=nvim
 bindkey -v
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
 KEYTIMEOUT=1
