@@ -1,7 +1,21 @@
+# Appearance
 font-family                = "JetBrainsMono Nerd Font Mono"
-font-size                  = 13
+font-size                  = 12
 theme                      = Sonokai
-macos-icon                 = retro
+title                      = " "
+macos-icon                 = chalkboard
 macos-titlebar-proxy-icon  = hidden
-shell-integration-features = ssh-env
+macos-titlebar-style       = hidden
+
+## General Features
+
+shell-integration-features = ssh-env,no-title
 desktop-notifications      = true
+
+# Quick Terminal
+keybind                           = global:cmd+semicolon=toggle_quick_terminal
+quick-terminal-position           = center
+quick-terminal-size               = 55%,55%
+quick-terminal-screen             = mouse
+quick-terminal-animation-duration = 0.125
+

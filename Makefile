@@ -32,5 +32,9 @@ vscode:
 zsh:
 	stow zsh
 
+.PHONY: hushlogin
+hushlogin:
+	touch ~/.hushlogin
+
 .PHONY: install
-install: git intellij starship tmux vscode ghostty zsh
+install: git hushlogin intellij starship tmux vscode ghostty zsh

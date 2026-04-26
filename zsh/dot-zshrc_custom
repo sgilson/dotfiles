@@ -4,6 +4,11 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# Start notes in quick terminal
+if [[ "$GHOSTTY_QUICK_TERMINAL" == 1 ]]; then
+  exec nvim -c 'norm G$' -c 'autocmd User VeryLazy lua require("lualine").hide()' ~/Documents/notes.md
+fi
+
 # Start zinit
 ## Setup
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
