@@ -17,5 +17,5 @@ keybind                           = global:cmd+semicolon=toggle_quick_terminal
 quick-terminal-position           = center
 quick-terminal-size               = 55%,55%
 quick-terminal-screen             = macos-menu-bar
-quick-terminal-animation-duration = 0.75
+quick-terminal-animation-duration = 0.075
 
