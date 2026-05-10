@@ -51,15 +51,15 @@ _prompt_git_status() {
 # --- vi mode ---
 
 _prompt_vimode='insert'
-_prompt_char_str='%B%F{green}>%f%b '
+_prompt_char_str='%B%F{green}%f%b '
 
 _prompt_update_char() {
+  echo -ne '\e[5 q' # blinking beam
   if [[ $_prompt_vimode == 'cmd' ]]; then
-    _prompt_char_str='%B%F{green}<%f%b '
-  elif (( _prompt_last_status == 0 )); then
-    _prompt_char_str='%B%F{green}>%f%b '
+    echo -ne '\e[2 q' # solid block
+    _prompt_char_str='%B%F{yellow}%f%b '
   else
-    _prompt_char_str='%B%F{red}x%f%b '
+    _prompt_char_str='%B%F{green}%f%b '
   fi
 }
 
@@ -84,7 +84,7 @@ zle -N zle-line-init
 # --- precmd: assemble prompt ---
 
 _prompt_precmd() {
-  _prompt_last_status=$?
+  local status_info=" %(?..%B%F{red}%? ✘ %f%b)"
 
   vcs_info
 
@@ -96,14 +96,14 @@ _prompt_precmd() {
     (( _git_ahead > 0 && _git_behind > 0 )) && indicators+="<>"
     (( _git_ahead > 0 && _git_behind == 0 )) && indicators+=">"
     (( _git_behind > 0 && _git_ahead == 0 )) && indicators+="<"
-    (( _git_staged > 0 )) && indicators+="+${_git_staged}"
-    (( _git_unstaged > 0 )) && indicators+="!${_git_unstaged}"
-    (( _git_untracked > 0 )) && indicators+="?${_git_untracked}"
-    (( _git_renamed > 0 )) && indicators+="r${_git_renamed}"
-    (( _git_deleted > 0 )) && indicators+="x${_git_deleted}"
+    (( _git_staged > 0 )) && indicators+="%B%F{green}+${_git_staged}%f%b"
+    (( _git_unstaged > 0 )) && indicators+="%B%F{yellow}!${_git_unstaged}%f%b"
+    (( _git_untracked > 0 )) && indicators+="%B%F{white}?${_git_untracked}%f%b"
+    (( _git_renamed > 0 )) && indicators+="%B%F{magenta}r${_git_renamed}%f%b"
+    (( _git_deleted > 0 )) && indicators+="%B%F{red}x${_git_deleted}%f%b"
 
     git_info=" %B%F{green}${vcs_info_msg_0_}%f%b"
-    [[ -n $indicators ]] && git_info+=" %B%F{green}[${indicators}]%f%b"
+    [[ -n $indicators ]] && git_info+=" %B%F{green}[${indicators}%B%F{green}]%f%b"
   fi
 
   local dir_info="%B%F{cyan}%3~%f%b"
@@ -111,6 +111,7 @@ _prompt_precmd() {
 
   _prompt_update_char
 
+  RPROMPT="${status_info}%F{242}%T%f"
   PROMPT="${dir_info}${git_info}
 \${_prompt_char_str}"
 }

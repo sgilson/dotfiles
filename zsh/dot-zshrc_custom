@@ -64,31 +64,47 @@ fi
 
 source ~/.zsh-prompt
 
-if [[ $+commands[kubectl] ]]; then
+if (( $+commands[kubectl] )); then
   source <(kubectl completion zsh)
   compdef __start_kubectl k
 fi
 
-if [[ $+commands[sqlx] ]]; then
+if (( $+commands[sqlx] )); then
   source <(sqlx completions zsh)
 fi
 
-if [[ $+commands[fzf] ]]; then
+if (( $+commands[fzf] )); then
   eval "$(fzf --zsh)"
 fi
 
-if [[ $+commands[zoxide] ]]; then
+if (( $+commands[zoxide] )); then
   eval "$(zoxide init zsh --cmd cd)"
 fi
 
-if [[ $+commands[delta] ]]; then
+if (( $+commands[delta] )); then
   eval "$(delta --generate-completion zsh)"
 fi
 
 source ~/.aliases
 
 export EDITOR=nvim
+
+for cmd in nvim vim vi; do
+  if (( $+commands[$cmd] )); then
+    export EDITOR=$cmd
+    break
+  fi
+done
+export VISUAL=$EDITOR
+
+KEYTIMEOUT=1
+
 bindkey -v
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
-KEYTIMEOUT=1
+bindkey ' ' magic-space
+
+# requires vim keybindings
+bindkey -s '^Xgc' 'git commit -s -m ""\eha'
+bindkey -s '^Xgs' 'git switch ""\eha'
+

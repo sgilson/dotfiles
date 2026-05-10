@@ -20,17 +20,9 @@ git:
 ghostty:
 	stow ghostty
 
-.PHONY: starship
-starship:
-	stow starship
-
 .PHONY: tmux
 tmux:
 	stow tmux
-
-.PHONY: vscode
-vscode:
-	stow vscode
 
 .PHONY: zsh
 zsh:
@@ -41,4 +33,4 @@ hushlogin:
 	touch ~/.hushlogin
 
 .PHONY: install
-install: git claude hushlogin intellij starship tmux vscode ghostty zsh
+install: git claude hushlogin intellij tmux vscode ghostty zsh
