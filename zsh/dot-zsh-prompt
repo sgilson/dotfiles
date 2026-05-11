@@ -6,7 +6,7 @@ autoload -Uz vcs_info add-zsh-hook
 # --- vcs_info ---
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats '%b %7.7i'
+zstyle ':vcs_info:git:*' formats '%b'
 zstyle ':vcs_info:git:*' actionformats '%b %7.7i (%a)'
 zstyle ':vcs_info:git:*' get-revision true
 zstyle ':vcs_info:git:*' check-for-changes false
