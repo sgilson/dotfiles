@@ -84,7 +84,7 @@ zle -N zle-line-init
 # --- precmd: assemble prompt ---
 
 _prompt_precmd() {
-  local status_info=" %(?..%B%F{red}%? ✘ %f%b)"
+  local status_info=" %(?..%B%F{red} ✘ %f%b)"
 
   vcs_info
 
