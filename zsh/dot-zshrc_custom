@@ -1,6 +1,3 @@
-# Source this file after a new zsh or oh-my-zsh installation
-# in your ~/.zshrc
-
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -58,7 +55,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-if [[ $+commands[mise] ]]; then
+if (( $+commands[mise] )); then
   eval "$(mise activate zsh)"
 fi
 
@@ -84,6 +81,36 @@ fi
 if (( $+commands[delta] )); then
   eval "$(delta --generate-completion zsh)"
 fi
+
+typeset -gA EXPECTED_DEPS=(
+  git     "version control (used by prompt + aliases)"
+  mise    "runtime version manager"
+  fzf     "fuzzy finder"
+  zoxide  "smart cd"
+  delta   "git diff pager"
+  kubectl "kubernetes CLI"
+  sqlx    "sqlx-cli completions"
+  lsd     "ls replacement"
+  bat     "syntax-highlighted cat"
+  nvim    "editor"
+  gdate   "GNU date (macOS)"
+)
+
+check-deps() {
+  local name max=0 missing=0
+  for name in ${(k)EXPECTED_DEPS}; do
+    (( ${#name} > max )) && max=${#name}
+  done
+  for name in ${(ok)EXPECTED_DEPS}; do
+    if (( $+commands[$name] )); then
+      printf "  %-${max}s  %s%-7s%s  %s\n" "$name" $'\e[32m' ok $'\e[0m' "${EXPECTED_DEPS[$name]}"
+    else
+      printf "  %-${max}s  %s%-7s%s  %s\n" "$name" $'\e[31m' missing $'\e[0m' "${EXPECTED_DEPS[$name]}"
+      (( missing++ ))
+    fi
+  done
+  return $(( missing > 0 ))
+}
 
 source ~/.aliases
 

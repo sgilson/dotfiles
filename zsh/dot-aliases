@@ -1,10 +1,10 @@
-if [[ $+commands[kubectl] ]]; then
+if (( $+commands[kubectl] )); then
     alias k=kubectl
 fi
-if [[ $+commands[nvim] ]]; then
+if (( $+commands[nvim] )); then
     alias vim=nvim
 fi
-if [[ $+commands[gdate] ]]; then
+if (( $+commands[gdate] )); then
     alias date="gdate"
 fi
 
@@ -20,8 +20,12 @@ alias gd="git diff"
 alias gds="git diff --staged"
 
 alias lsf="ls -larth"
-alias lld="lsd -lrt --git --date '+%Y-%m-%d %H:%M:%S'"
-alias ll="lsd -lrt  --blocks permission,name,git"
+if (( $+commands[lsd] )); then
+    alias lld="lsd -lrt --git --date '+%Y-%m-%d %H:%M:%S'"
+    alias ll="lsd -lrt  --blocks permission,name,git"
+fi
 alias c="clear"
 alias u="cd .."
-alias fzfp="fzf --preview 'bat --color=always {}'"
+if (( $+commands[fzf] )) && (( $+commands[bat] )); then
+    alias fzfp="fzf --preview 'bat --color=always {}'"
+fi
