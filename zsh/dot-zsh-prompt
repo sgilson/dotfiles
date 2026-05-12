@@ -93,9 +93,9 @@ _prompt_precmd() {
     _prompt_git_status
 
     local indicators=""
-    (( _git_ahead > 0 && _git_behind > 0 )) && indicators+="<>"
-    (( _git_ahead > 0 && _git_behind == 0 )) && indicators+=">"
-    (( _git_behind > 0 && _git_ahead == 0 )) && indicators+="<"
+    (( _git_ahead > 0 && _git_behind > 0 )) && indicators+=""
+    (( _git_ahead > 0 && _git_behind == 0 )) && indicators+=""
+    (( _git_behind > 0 && _git_ahead == 0 )) && indicators+=""
     (( _git_staged > 0 )) && indicators+="%B%F{green}+${_git_staged}%f%b"
     (( _git_unstaged > 0 )) && indicators+="%B%F{yellow}!${_git_unstaged}%f%b"
     (( _git_untracked > 0 )) && indicators+="%B%F{white}?${_git_untracked}%f%b"
