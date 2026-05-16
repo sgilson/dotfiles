@@ -24,8 +24,6 @@ if (( $+commands[lsd] )); then
     alias lld="lsd -lrt --git --date '+%Y-%m-%d %H:%M:%S'"
     alias ll="lsd -lrt  --blocks permission,name,git"
 fi
-alias c="clear"
-alias u="cd .."
 if (( $+commands[fzf] )) && (( $+commands[bat] )); then
     alias fzfp="fzf --preview 'bat --color=always {}'"
 fi
