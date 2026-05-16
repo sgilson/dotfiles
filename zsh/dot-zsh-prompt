@@ -103,7 +103,12 @@ _prompt_precmd() {
     (( _git_deleted > 0 )) && indicators+="%B%F{red}x${_git_deleted}%f%b"
 
     git_info=" %B%F{green}${vcs_info_msg_0_}%f%b"
-    [[ -n $indicators ]] && git_info+=" %B%F{green}[${indicators}%B%F{green}]%f%b"
+    if [[ -z $indicators ]]; then
+      git_status="%B%F{green}"
+    else
+      git_status="%B%F{green}[$indicators%B%F{green}]"
+    fi
+    git_info+=" $git_status%f%b"
   fi
 
   local dir_info="%B%F{cyan}%3~%f%b"
