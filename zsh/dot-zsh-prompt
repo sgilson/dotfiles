@@ -116,7 +116,7 @@ _prompt_precmd() {
 
   _prompt_update_char
 
-  RPROMPT="${status_info}%F{242}%T%f"
+  RPROMPT="${status_info}%F{#4C566A}%T%f"
   PROMPT="${dir_info}${git_info}
 \${_prompt_char_str}"
 }
