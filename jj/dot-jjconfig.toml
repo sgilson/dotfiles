@@ -1,2 +1,6 @@
 [ui]
 default-command = ["log", "-r", "@ | ancestors(remote_bookmarks().., 2) | trunk()"]
+
+[templates]
+git_push_bookmark = '"sgilson/push-" ++ change_id.short()'
+
