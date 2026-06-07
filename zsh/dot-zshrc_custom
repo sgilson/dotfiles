@@ -82,6 +82,11 @@ if (( $+commands[delta] )); then
   eval "$(delta --generate-completion zsh)"
 fi
 
+if (( $+commands[jj] )); then
+  source <(jj util completion zsh)
+fi
+
+
 typeset -gA EXPECTED_DEPS=(
   git     "version control (used by prompt + aliases)"
   mise    "runtime version manager"
