@@ -1,6 +1,6 @@
 # Appearance
-font-family                = "JetBrainsMono Nerd Font Mono"
-font-size                  = 12
+font-family                = "InconsolataGo Nerd Font Mono"
+font-size                  = 14
 theme                      = Nord
 title                      = " "
 macos-icon                 = chalkboard

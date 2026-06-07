@@ -17,4 +17,6 @@ make install
 echo 'source ~/.zshrc_custom' >> ~/.zshrc # only on first install
 ```
 
-Additionally install IntelliJ IDEA with the IdeaVim Plugin.
+
+Install the current font in the [Ghostty config](./ghostty/dot-config/ghostty/config) from [NerdFont downloads](https://www.nerdfonts.com/font-downloads).
+
