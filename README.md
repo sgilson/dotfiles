@@ -8,10 +8,11 @@ is done through [GNU Stow](https://www.gnu.org/software/stow/).
 Clone the repository and perform the following:
 
 ```shell
-brew install stow ghostty starship mise zoxide fzf bat git-delta 
+brew install stow ghostty starship mise zoxide fzf bat git-delta jj
 brew install --cask nikitabobko/tap/aerospace
 brew tap FelixKratz/formulae
 brew install borders
+cargo install --locked jj-starship
 make install
 echo 'source ~/.zshrc_custom' >> ~/.zshrc # only on first install
 ```

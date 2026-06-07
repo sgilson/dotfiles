@@ -85,30 +85,35 @@ zle -N zle-line-init
 
 _prompt_precmd() {
   local status_info=" %(?..%B%F{red} ✘ %f%b)"
+  local vcs_info_str=""
 
-  vcs_info
+   if command jj root --quiet &>/dev/null; then
+    vcs_info_str=" $(command jj-starship --no-jj-prefix)"
+   else
+    # Fallback to Git
+    vcs_info
 
-  local git_info=""
-  if [[ -n $vcs_info_msg_0_ ]]; then
-    _prompt_git_status
+    if [[ -n $vcs_info_msg_0_ ]]; then
+      _prompt_git_status
 
-    local indicators=""
-    (( _git_ahead > 0 && _git_behind > 0 )) && indicators+=""
-    (( _git_ahead > 0 && _git_behind == 0 )) && indicators+=""
-    (( _git_behind > 0 && _git_ahead == 0 )) && indicators+=""
-    (( _git_staged > 0 )) && indicators+="%B%F{green}+${_git_staged}%f%b"
-    (( _git_unstaged > 0 )) && indicators+="%B%F{yellow}!${_git_unstaged}%f%b"
-    (( _git_untracked > 0 )) && indicators+="%B%F{white}?${_git_untracked}%f%b"
-    (( _git_renamed > 0 )) && indicators+="%B%F{magenta}r${_git_renamed}%f%b"
-    (( _git_deleted > 0 )) && indicators+="%B%F{red}x${_git_deleted}%f%b"
+      local indicators=""
+      (( _git_ahead > 0 && _git_behind > 0 )) && indicators+=""
+      (( _git_ahead > 0 && _git_behind == 0 )) && indicators+=""
+      (( _git_behind > 0 && _git_ahead == 0 )) && indicators+=""
+      (( _git_staged > 0 )) && indicators+="%B%F{green}+${_git_staged}%f%b"
+      (( _git_unstaged > 0 )) && indicators+="%B%F{yellow}!${_git_unstaged}%f%b"
+      (( _git_untracked > 0 )) && indicators+="%B%F{white}?${_git_untracked}%f%b"
+      (( _git_renamed > 0 )) && indicators+="%B%F{magenta}r${_git_renamed}%f%b"
+      (( _git_deleted > 0 )) && indicators+="%B%F{red}x${_git_deleted}%f%b"
 
-    git_info=" %B%F{green}${vcs_info_msg_0_}%f%b"
-    if [[ -z $indicators ]]; then
-      git_status="%B%F{green}"
-    else
-      git_status="%B%F{green}[$indicators%B%F{green}]"
+      vcs_info_str=" %B%F{green}${vcs_info_msg_0_}%f%b"
+      if [[ -z $indicators ]]; then
+        git_status="%B%F{green}"
+      else
+        git_status="%B%F{green}[$indicators%B%F{green}]"
+      fi
+      vcs_info_str+=" $git_status%f%b"
     fi
-    git_info+=" $git_status%f%b"
   fi
 
   local dir_info="%B%F{cyan}%3~%f%b"
@@ -117,7 +122,7 @@ _prompt_precmd() {
   _prompt_update_char
 
   RPROMPT="${status_info}%F{#4C566A}%T%f"
-  PROMPT="${dir_info}${git_info}
+  PROMPT="${dir_info}${vcs_info_str}
 \${_prompt_char_str}"
 }
 
