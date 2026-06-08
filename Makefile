@@ -3,10 +3,6 @@
 aerospace:
 	stow aerospace
 
-.PHONY: intellij
-intellij:
-	stow intellij
-
 .PHONY: jj
 jj:
 	stow jj
@@ -37,4 +33,4 @@ hushlogin:
 	touch ~/.hushlogin
 
 .PHONY: install
-install: git jj claude hushlogin intellij tmux vscode ghostty zsh
+install: git jj claude hushlogin tmux vscode ghostty zsh
