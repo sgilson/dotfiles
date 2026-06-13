@@ -18,25 +18,31 @@ alias gc="git switch"
 alias ga="git add"
 alias gd="git diff"
 alias gds="git diff --staged"
+alias r=reset
+alias rr="exec zsh"
 
-alias lsf="ls -larth"
 if (( $+commands[lsd] )); then
-    alias lld="lsd -lrt --git --date '+%Y-%m-%d %H:%M:%S'"
+    alias lld="lsd -lrt --git --date '+%y-%m-%d %h:%m:%s'"
     alias ll="lsd -lrt  --blocks permission,name,git"
 fi
-if (( $+commands[fzf] )) && (( $+commands[bat] )); then
-    alias fzfp="fzf --preview 'bat --color=always {}'"
-fi
+
+lsf() {
+  if (( $+commands[lsd] )); then
+    lsd -lrt --git --date '+%y-%m-%d %h:%m:%s'
+  else
+    ls -larth
+  fi
+}
 
 jjj() {
-  cmd="show"
+  local cmd="show"
   if (( $# >= 1 )); then
     cmd="$1"
     shift
   fi
 
-  selected=$(
-    jj log -r 'all()' -T 'separate(" ", change_id.shortest(7), description.first_line())' --color=always \
+  local selected=$(
+    jj log -r 'all()' -T 'separate(" ", change_id.shortest(7), local_bookmarks, tags, description.first_line())' --color=always \
       | fzf \
           --min-height=15 \
           --cycle \
@@ -47,6 +53,68 @@ jjj() {
           --prompt "jj $cmd $@> "
   ) || return 0
 
-  rev=$(echo "$selected" | awk '{for(i=1;i<=NF;i++) if(length($i)>=7){print $i; exit}}')
-  jj "$cmd" -r "$rev" "$@"
+  local rev=$(echo "$selected" | awk '{for(i=1;i<=NF;i++) if(length($i)>=7){print $i; exit}}')
+  jj "$cmd" -r "$rev" $@
+}
+
+_groot() {
+  # git root or cwd
+  root=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [[ -n "$root" ]]; then 
+    echo "$root"
+    return 0
+  fi
+  echo "$PWD"
+}
+
+ff() {
+  # find file and execute
+  # searches entire git repo if root is found
+  local root=$(_groot)
+  local selected=$(
+    FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob \"!**/.git/*\" --glob \"!**/.idea/*\" $root" \
+      fzf \
+        --min-height=15 \
+        --cycle \
+        --ansi \
+        --ghost '<filename>' \
+        --tmux center,75%,75% \
+        --preview 'bat --color=always {}' \
+        --preview-window=top:60%
+  ) || return 0
+
+  
+  if [[ "$#" -eq 0 ]]; then
+    echo "$selected"
+    return 0
+  fi
+  
+  local cmd="$1"
+  shift
+
+  case $cmd in
+    c|copy)
+      cat "$selected" | pbcopy
+      return 0
+      ;;
+    cd)
+      local dir=$(dirname "$selected")
+      builtin cd "$dir"
+      lsf
+      return 0
+      ;;
+    v)
+      cmd=vim
+      ;;
+    b)
+      bat --color=always "$selected"
+      return 0
+      ;;
+    jjd)
+      jj diff "$selected"
+      return 0
+      ;;
+  esac
+  
+  $cmd $@ "$selected"
 }
