@@ -27,3 +27,26 @@ fi
 if (( $+commands[fzf] )) && (( $+commands[bat] )); then
     alias fzfp="fzf --preview 'bat --color=always {}'"
 fi
+
+jjj() {
+  cmd="show"
+  if (( $# >= 1 )); then
+    cmd="$1"
+    shift
+  fi
+
+  selected=$(
+    jj log -r 'all()' -T 'separate(" ", change_id.shortest(7), description.first_line())' --color=always \
+      | fzf \
+          --min-height=15 \
+          --cycle \
+          --ansi \
+          --tmux=center,75%,75% \
+          --preview 'echo {} | awk "{for(i=1;i<=NF;i++) if(length(\$i)>=7){print \$i; exit}}" | xargs jj show --color=always ' \
+          --preview-window=top:60% \
+          --prompt "jj $cmd $@> "
+  ) || return 0
+
+  rev=$(echo "$selected" | awk '{for(i=1;i<=NF;i++) if(length($i)>=7){print $i; exit}}')
+  jj "$cmd" -r "$rev" "$@"
+}
