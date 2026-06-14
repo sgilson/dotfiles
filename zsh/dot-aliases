@@ -48,7 +48,7 @@ jjj() {
           --cycle \
           --ansi \
           --tmux=center,75%,75% \
-          --preview 'echo {} | awk "{for(i=1;i<=NF;i++) if(length(\$i)>=7){print \$i; exit}}" | xargs jj show --color=always 2>/dev/null' \
+          --preview 'echo {} | cut -d " " -f1 | xargs jj show --color=always 2>/dev/null' \
           --preview-window=top:60% \
           --prompt "jj $cmd $@> "
   ) || return 0
@@ -56,7 +56,7 @@ jjj() {
     return 0
   fi
 
-  local rev=$(echo "$selected" | awk '{for(i=1;i<=NF;i++) if(length($i)>=7){print $i; exit}}')
+  local rev=$(echo "$selected" | cut -d ' ' -f1)
   jj "$cmd" -r "$rev" $@
 }
 
