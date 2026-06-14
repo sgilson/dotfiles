@@ -70,11 +70,18 @@ jjsb() {
           --ansi \
           --prompt "branch> "
   ) || return 0
+  if [[ -z "$selected" ]]; then
+    return 0
+  fi
   echo "$selected" | cut -d : -f1
 }
 
 jjpb() {
 # jj push bookmark
+  local bookmark=$(jjsb)
+  if [[ -z "$bookmark" ]]; then
+    return 0
+  fi
   jj git push -b "$(jjsb)"
 }
 
@@ -103,7 +110,9 @@ ff() {
         --preview 'bat --color=always {}' \
         --preview-window=top:60%
   ) || return 0
-
+  if [[ -z "$selected" ]]; then
+    return 0
+  fi
   
   if [[ "$#" -eq 0 ]]; then
     echo "$selected"
