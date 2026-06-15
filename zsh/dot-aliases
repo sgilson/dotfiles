@@ -133,6 +133,10 @@ ff() {
       lsf
       return 0
       ;;
+    md)
+      tmux display-popup -E -w '75%' -h '75%' "lowdown -t term \"$selected\" | less -R"
+      return 0
+      ;;
     v)
       cmd=vim
       ;;
