@@ -84,7 +84,7 @@ jjpb() {
   if [[ -z "$bookmark" ]]; then
     return 0
   fi
-  jj git push -b "$(jjsb)"
+  jj git push -b "$bookmark"
 }
 
 _groot() {
