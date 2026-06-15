@@ -136,7 +136,12 @@ ff() {
       return 0
       ;;
     md)
-      tmux display-popup -E -w '75%' -h '75%' "lowdown -t term \"$selected\" | less -R"
+      local full_cmd="lowdown -t term \"$selected\" | less -R"
+      if [[ -n "$TMUX" ]]; then
+        tmux display-popup -E -w '75%' -h '75%' "$full_cmd"
+      else
+        eval "$full_cmd"
+      fi
       return 0
       ;;
     v)
