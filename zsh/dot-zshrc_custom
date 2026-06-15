@@ -54,8 +54,13 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+local fzf_tab_preview='ls --color $realpath'
+if (( $+commands[lsd] )); then
+  fzf_tab_preview='lsd --color=always --tree --group-directories-first $realpath'
+fi
+zstyle ':fzf-tab:complete:cd:*' fzf-preview "$fzf_tab_preview"
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview "$fzf_tab_preview"
 
 if (( $+commands[mise] )); then
   eval "$(mise activate zsh)"
@@ -100,6 +105,8 @@ typeset -gA EXPECTED_DEPS=(
   lsd     "ls replacement"
   bat     "syntax-highlighted cat"
   nvim    "editor"
+  tmux    "terminal multiplexer"
+  lowdown "markdown renderer"
   gdate   "GNU date (macOS)"
 )
 
