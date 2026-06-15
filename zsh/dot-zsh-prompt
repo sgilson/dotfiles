@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # Pure zsh prompt — git info, vi mode, directory
 
 setopt prompt_subst
